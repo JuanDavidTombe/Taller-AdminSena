@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Area extends Model
 {
-    use HasFactory;
+    public function teachers()
+    {
+        return $this->hasMany('App\Models\Teacher');
+    }
 }
