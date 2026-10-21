@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "conductor1@micromaster.com",
+      "password": "conductor123"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+      pm.environment.set('driverToken', json.token);
+      pm.test('200 OK', () => pm.response.to.have.status(200));
+      pm.test('Rol = TRANSPORTISTA', () => pm.expect(json.user.role).to.eql('TRANSPORTISTA'));
+    language: text/javascript
+order: 5000

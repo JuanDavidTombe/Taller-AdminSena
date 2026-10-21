@@ -1,0 +1,57 @@
+$kind: http-request
+name: https://restful-booker.herokuapp.com/booking
+description: "Generated from cURL: curl -X POST \\\r
+
+  \  https://restful-booker.herokuapp.com/booking \\\r
+
+  \  -H 'Content-Type: application/json' \\\r
+
+  \  -d '{\r
+
+  \    \"firstname\" : \"Jim\",\r
+
+  \    \"lastname\" : \"Brown\",\r
+
+  \    \"totalprice\" : 111,\r
+
+  \    \"depositpaid\" : true,\r
+
+  \    \"bookingdates\" : {\r
+
+  \        \"checkin\" : \"2018-01-01\",\r
+
+  \        \"checkout\" : \"2019-01-01\"\r
+
+  \    },\r
+
+  \    \"additionalneeds\" : \"Breakfast\"\r
+
+  }'"
+url: https://restful-booker.herokuapp.com/booking
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"firstname\" : \"Jim\",\r
+
+    \    \"lastname\" : \"Brown\",\r
+
+    \    \"totalprice\" : 111,\r
+
+    \    \"depositpaid\" : true,\r
+
+    \    \"bookingdates\" : {\r
+
+    \        \"checkin\" : \"2018-01-01\",\r
+
+    \        \"checkout\" : \"2019-01-01\"\r
+
+    \    },\r
+
+    \    \"additionalneeds\" : \"Breakfast\"\r
+
+    }"
+order: 1000

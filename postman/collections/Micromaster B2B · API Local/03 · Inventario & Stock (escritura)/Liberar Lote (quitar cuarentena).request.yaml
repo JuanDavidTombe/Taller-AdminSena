@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{baseUrl}}/api/stock/batches/{{batchId}}/block"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "is_quarantined": false
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('200 OK', () => pm.response.to.have.status(200));
+      const j = pm.response.json();
+      pm.test('Lote liberado', () => pm.expect(j.batch.is_quarantined).to.eql(false));
+    language: text/javascript
+order: 4000

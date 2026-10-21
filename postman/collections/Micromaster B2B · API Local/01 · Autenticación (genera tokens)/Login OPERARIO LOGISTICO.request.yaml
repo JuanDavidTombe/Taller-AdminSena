@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "logistica@micromaster.com",
+      "password": "logistica123"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+      pm.environment.set('operarioToken', json.token);
+      pm.test('200 OK', () => pm.response.to.have.status(200));
+      pm.test('Rol = OPERARIO_LOGISTICO', () => pm.expect(json.user.role).to.eql('OPERARIO_LOGISTICO'));
+    language: text/javascript
+order: 2000

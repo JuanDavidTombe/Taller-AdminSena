@@ -1,0 +1,15 @@
+$kind: http-request
+name: https://restful-booker.herokuapp.com/booking/1
+description: "Generated from cURL: curl -X DELETE \\\r
+
+  \  https://restful-booker.herokuapp.com/booking/1 \\\r
+
+  \  -H 'Content-Type: application/json' \\\r
+
+  \  -H 'Cookie: token=abc123'"
+url: https://restful-booker.herokuapp.com/booking/1
+method: DELETE
+headers:
+  Content-Type: application/json
+  Cookie: token=abc123
+order: 4000

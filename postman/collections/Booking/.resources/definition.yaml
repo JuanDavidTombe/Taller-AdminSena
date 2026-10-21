@@ -1,0 +1,9 @@
+$kind: collection
+auth:
+  - id: 966ea891-d955-480f-a201-aaed0c673f31
+    type: digest
+    name: Digest Auth
+    credentials:
+      algorithm: MD5
+      username: admin
+      password: password123

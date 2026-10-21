@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    protected $fillable = ['course_number', 'day', 'area_id', 'training_center_id'];
+
     public function trainingCenter()
     {
-        return $this->belongsTo('App\Models\TrainingCenter');
+        return $this->belongsTo('App\Models\Training_center');
     }
     public function apprentices()
     {

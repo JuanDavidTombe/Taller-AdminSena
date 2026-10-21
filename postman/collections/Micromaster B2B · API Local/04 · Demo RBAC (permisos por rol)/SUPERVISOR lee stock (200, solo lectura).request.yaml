@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/stock/batches"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{produccionToken}}"
+scripts:
+  - type: afterResponse
+    code: pm.test('200 - read_module inventory_stock', () => pm.response.to.have.status(200));
+    language: text/javascript
+order: 4000

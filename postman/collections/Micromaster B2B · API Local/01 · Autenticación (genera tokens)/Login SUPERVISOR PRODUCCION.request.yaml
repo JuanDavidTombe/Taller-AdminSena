@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "produccion@micromaster.com",
+      "password": "produccion123"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+      pm.environment.set('produccionToken', json.token);
+      pm.test('200 OK', () => pm.response.to.have.status(200));
+      pm.test('Rol = SUPERVISOR_PRODUCCION', () => pm.expect(json.user.role).to.eql('SUPERVISOR_PRODUCCION'));
+    language: text/javascript
+order: 3000

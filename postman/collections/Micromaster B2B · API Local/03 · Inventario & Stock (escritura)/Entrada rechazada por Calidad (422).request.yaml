@@ -1,0 +1,32 @@
+$kind: http-request
+url: "{{baseUrl}}/api/stock/entry"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "ingredient_id": 1,
+      "batch_code": "POSTMAN-FAIL-{{$timestamp}}",
+      "quantity": 5,
+      "expiration_date": "2027-06-30",
+      "storage_zone": "A-01",
+      "quality_checklist": {
+        "temperature": true,
+        "packaging": false,
+        "labeling": true,
+        "sanitary_registry": true
+      }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('422 Unprocessable', () => pm.response.to.have.status(422));
+      pm.test('Motivo = QUALITY_REJECTED', () => pm.expect(pm.response.json().error).to.eql('QUALITY_REJECTED'));
+    language: text/javascript
+order: 2000

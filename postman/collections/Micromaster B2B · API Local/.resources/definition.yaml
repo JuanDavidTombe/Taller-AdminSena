@@ -1,0 +1,11 @@
+$kind: collection
+description: |-
+  Colección lista para ejecutar contra el backend Laravel de Micromaster.
+
+  Uso:
+  1. Importa este archivo y el environment 'Micromaster Local'.
+  2. Selecciona el environment arriba a la derecha.
+  3. Ejecuta la carpeta '01 · Autenticación' con 'Run collection': guardará automáticamente un token por rol.
+  4. Prueba las carpetas 02/03 (lectura/escritura) y 04 (demo RBAC por rol).
+
+  Requiere Apache y MySQL de XAMPP arriba y el vhost http://micromaster.test.

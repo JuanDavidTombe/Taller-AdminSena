@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "admin@micromaster.com",
+      "password": "admin123"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+      pm.environment.set('adminToken', json.token);
+      pm.environment.set('token', json.token);
+      pm.test('200 OK', () => pm.response.to.have.status(200));
+      pm.test('Rol = ADMINISTRADOR', () => pm.expect(json.user.role).to.eql('ADMINISTRADOR'));
+      console.log('admin role_permissions:', JSON.stringify(json.user.role_permissions));
+    language: text/javascript
+order: 1000

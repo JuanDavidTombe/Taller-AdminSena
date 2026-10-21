@@ -1,0 +1,18 @@
+name: Micromaster Local
+values:
+  - key: baseUrl
+    value: 'http://micromaster.test'
+  - key: token
+    value: ''
+  - key: adminToken
+    value: ''
+  - key: operarioToken
+    value: ''
+  - key: produccionToken
+    value: ''
+  - key: contadorToken
+    value: ''
+  - key: driverToken
+    value: ''
+  - key: batchId
+    value: '1'

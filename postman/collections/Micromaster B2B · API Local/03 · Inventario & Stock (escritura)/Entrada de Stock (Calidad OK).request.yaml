@@ -1,0 +1,36 @@
+$kind: http-request
+url: "{{baseUrl}}/api/stock/entry"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "ingredient_id": 1,
+      "batch_code": "POSTMAN-{{$timestamp}}",
+      "supplier_name": "Proveedor Postman S.A.",
+      "quantity": 25,
+      "expiration_date": "2027-06-30",
+      "storage_zone": "A-01",
+      "purchase_order_code": "OC-2026-001",
+      "quality_checklist": {
+        "temperature": true,
+        "packaging": true,
+        "labeling": true,
+        "sanitary_registry": true
+      }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('201 Created', () => pm.response.to.have.status(201));
+      const j = pm.response.json();
+      pm.environment.set('batchId', j.batch.id);
+      console.log('lote creado:', j.batch.batch_code, '| zona:', j.batch.storage_zone);
+    language: text/javascript
+order: 1000

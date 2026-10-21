@@ -1,0 +1,6 @@
+$kind: http-request
+name: https://restful-booker.herokuapp.com/booking/1
+description: "Generated from cURL: curl -i https://restful-booker.herokuapp.com/booking/1"
+url: https://restful-booker.herokuapp.com/booking/1
+method: GET
+order: 2000
