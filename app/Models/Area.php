@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Area extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'image_url'];
 
     public function teachers()
     {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Area;
+use App\Services\CloudinaryService;
 
 class AreaController extends Controller
 {
@@ -17,10 +18,22 @@ class AreaController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
+            'image' => 'nullable|image|max:5120',
+            'image_url' => 'nullable|string',
         ]);
-        $area = Area::create($request->all());
 
-        return response()->json($area);
+        $data = $request->only(['name', 'image_url']);
+
+        if ($request->hasFile('image')) {
+            $uploadedUrl = CloudinaryService::upload($request->file('image'));
+            if ($uploadedUrl) {
+                $data['image_url'] = $uploadedUrl;
+            }
+        }
+
+        $area = Area::create($data);
+
+        return response()->json($area, 201);
     }
 
     public function show(Area $area)
@@ -32,9 +45,24 @@ class AreaController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
+            'image' => 'nullable|image|max:5120',
+            'image_url' => 'nullable|string',
         ]);
 
-        $area->update($request->all());
+        $data = $request->only(['name']);
+
+        if ($request->filled('image_url')) {
+            $data['image_url'] = $request->input('image_url');
+        }
+
+        if ($request->hasFile('image')) {
+            $uploadedUrl = CloudinaryService::upload($request->file('image'));
+            if ($uploadedUrl) {
+                $data['image_url'] = $uploadedUrl;
+            }
+        }
+
+        $area->update($data);
 
         return response()->json($area);
     }
